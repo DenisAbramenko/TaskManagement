@@ -30,7 +30,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(request -> {
-            request.requestMatchers("/login/**").permitAll().anyRequest().authenticated();
+            request.requestMatchers("/login/**").permitAll()
+                    .anyRequest().authenticated();
         });
         http.sessionManagement(manager -> {
             manager.sessionCreationPolicy(STATELESS);
@@ -43,7 +44,7 @@ public class SecurityConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(4);
     }
 
     @Bean
