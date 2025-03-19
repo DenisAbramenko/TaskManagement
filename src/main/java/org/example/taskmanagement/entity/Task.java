@@ -2,6 +2,7 @@ package org.example.taskmanagement.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +25,6 @@ public class Task {
     private Priority priority;  // HIGH, MEDIUM, LOW
 
     private String comments;
+    private String author;
+    private String executor;
 }

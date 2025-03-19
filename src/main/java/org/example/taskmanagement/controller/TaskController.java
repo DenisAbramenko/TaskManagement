@@ -22,8 +22,8 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDto) {
-        Task task = taskService.createTask(taskDto);
+    public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDTO) {
+        Task task = taskService.createTask(taskDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(task);
     }
 
@@ -46,10 +46,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Task>> getTasks(@RequestParam(value = "status", required = false) String status,
-                                               @RequestParam(value = "priority", required = false) String priority,
-                                               Pageable pageable) {
-        List<Task> tasks = taskService.getFilteredTasks(status, priority, pageable);
+    public ResponseEntity<List<Task>> getTasks() {
+        List<Task> tasks = taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
     }
 }

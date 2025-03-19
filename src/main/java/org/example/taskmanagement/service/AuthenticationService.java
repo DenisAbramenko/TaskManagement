@@ -30,8 +30,11 @@ public class AuthenticationService {
      */
     public JwtAuthenticationResponse signUp(UserDTO request) {
 
-        User user =
-                User.builder().email(request.getEmail()).password(passwordEncoder.encode(request.getPassword())).role(Role.ROLE_USER).build();
+        User.UserBuilder builder = User.builder();
+        builder.email(request.getEmail());
+        builder.password(passwordEncoder.encode(request.getPassword()));
+        builder.role(Role.ROLE_USER);
+        User user = builder.build();
 
         userService.create(user);
 
