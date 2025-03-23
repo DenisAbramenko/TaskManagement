@@ -29,10 +29,23 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(request -> {
-            request.requestMatchers("/login/**").permitAll()
-                    .anyRequest().authenticated();
-        });
+//        http.authorizeHttpRequests(request -> {
+//            request.requestMatchers("/login/**").permitAll()
+//                    .anyRequest().authenticated();
+////            request.anyRequest().permitAll();
+//        });
+        //todo аутентификацию
+        http.authorizeHttpRequests((requests) -> requests
+                    .requestMatchers("/", "/home").permitAll()
+                    .anyRequest().authenticated()
+            )
+                    .formLogin((form) -> form
+                            .loginPage("/login")
+                            .permitAll()
+                    )
+                    .logout((logout) -> logout
+                            .permitAll()
+                    );
         http.sessionManagement(manager -> {
             manager.sessionCreationPolicy(STATELESS);
         });
