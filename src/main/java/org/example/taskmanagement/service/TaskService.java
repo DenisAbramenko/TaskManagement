@@ -40,6 +40,7 @@ public class TaskService {
      */
     public Task updateTask(Long id, TaskDTO taskDto) {
         Task task = repository.findById(id).get();
+        task.setHeading(taskDto.getHeading());
         task.setDescription(taskDto.getDescription());
         task.setPriority(taskDto.getPriority());
         task.setStatus(taskDto.getStatus());
@@ -67,7 +68,7 @@ public class TaskService {
     }
 
     /**
-     * Просмотр задачи
+     * Просмотр задач
      *
      * @return список задач
      */
