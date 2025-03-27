@@ -2,6 +2,7 @@ package org.example.taskmanagement.service;
 
 import org.example.taskmanagement.dto.TaskDTO;
 import org.example.taskmanagement.entity.Task;
+import org.example.taskmanagement.exception.TaskNotFoundException;
 import org.example.taskmanagement.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,9 @@ public class TaskService {
      * @return отредактированная задача
      */
     public Task updateTask(Long id, TaskDTO taskDto) {
+        if (!repository.findById(id).isPresent()) {
+            throw new TaskNotFoundException("Task not found");
+        }
         Task task = repository.findById(id).get();
         task.setHeading(taskDto.getHeading());
         task.setDescription(taskDto.getDescription());
