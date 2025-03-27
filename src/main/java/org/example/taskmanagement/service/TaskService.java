@@ -56,6 +56,9 @@ public class TaskService {
      * @return созданная задача
      */
     public Task createTask(TaskDTO taskDTO) {
+        if (repository.findByHeading(taskDTO.getHeading()).isPresent()) {
+            throw new IllegalArgumentException("Task's heading already exists");
+        }
         Task.TaskBuilder builder = Task.builder();
         builder.heading(taskDTO.getHeading());
         builder.description(taskDTO.getDescription());

@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface TaskRepository extends JpaRepository<Task, Long> {
     @Override
     Optional<Task> findById(Long id);
+    Optional<Task> findByHeading(String heading);
 
 }
